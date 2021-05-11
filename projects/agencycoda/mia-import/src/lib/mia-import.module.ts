@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 /** COMPONENTS */
 import { MiaImportComponent } from './mia-import.component';
@@ -24,6 +25,7 @@ import { MiaImportModalComponent } from './modals/mia-import-modal/mia-import-mo
     MatInputModule,
     MatSelectModule,
     MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     MiaImportComponent,

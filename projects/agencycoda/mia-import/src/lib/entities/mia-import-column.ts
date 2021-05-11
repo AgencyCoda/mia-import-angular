@@ -9,4 +9,5 @@ export class MiaImportColumn {
     title: string = '';
     field_key: string = '';
     type: number = 0;
+    columnIndex?: number = -1;
 }

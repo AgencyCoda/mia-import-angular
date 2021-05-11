@@ -1,1 +1,52 @@
-<p>mia-import-modal works!</p>
+<h2 mat-dialog-title>{{ config.title }}</h2>
+<!-- STEP 1-->
+<mat-dialog-content *ngIf="step == 1" class="mat-typography">
+  <mat-form-field appearance="outline">
+        <mat-label>¿El archivo posee un Header?</mat-label>
+        <mat-select [(ngModel)]="hasHeader">
+            <mat-option [value]="false">NO</mat-option>
+            <mat-option [value]="true">SI</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+  <div *ngIf="hasHeader">
+    <mat-form-field appearance="outline">
+        <mat-label>Seleccione numero de fila del header</mat-label>
+        <mat-select [(ngModel)]="headerNumberRow">
+            <mat-option *ngFor="let ind of indexes" [value]="ind">{{ ind }}</mat-option>
+          </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Seleccione numero de fila donde comienza la información</mat-label>
+    <mat-select [(ngModel)]="dataNumberRow">
+        <mat-option *ngFor="let ind of indexes" [value]="ind">{{ ind }}</mat-option>
+      </mat-select>
+</mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="step == 1" align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+
+  <input #inputFile type="file" (change)="onProcessFiles($event.target)" style="display: none;" accept="text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+  <button mat-button cdkFocusInitial (click)="inputFile.click()">Select File (.xlsx)</button>
+</mat-dialog-actions>
+
+
+<!-- STEP 2 -->
+<mat-dialog-content *ngIf="step == 2" class="mat-typography">
+    <div *ngFor="let dataIndex of dataNumberExistRowArr" class="columns">
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo de columna</mat-label>
+            <mat-select (selectionChange)="onSelectColumn($event, dataIndex)">
+                <mat-option *ngFor="let column of config.columns" [value]="column">{{ column.title}}</mat-option>
+              </mat-select>
+        </mat-form-field>
+        <div *ngFor="let item of dataExample" class="item-example">{{ item[dataIndex] }}</div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="step == 2" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onImport()">Import</button>
+  </mat-dialog-actions>
