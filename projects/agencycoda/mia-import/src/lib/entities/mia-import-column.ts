@@ -10,4 +10,7 @@ export class MiaImportColumn {
     field_key: string = '';
     type: number = 0;
     columnIndex?: number = -1;
+    field_option?: string = ''; // Key donde se guarda el valor del tipo de dato
+    options?: Array<any>;
+    columnOptionId?: any;
 }

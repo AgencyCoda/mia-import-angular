@@ -23,7 +23,12 @@
     <mat-select [(ngModel)]="dataNumberRow">
         <mat-option *ngFor="let ind of indexes" [value]="ind">{{ ind }}</mat-option>
       </mat-select>
-</mat-form-field>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Escriba el numero de fila donde termina la información (opcional)</mat-label>
+    <input matInput type="text" [(ngModel)]="dataNumberEndRow" />
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="step == 1" align="end">
   <button mat-button mat-dialog-close>Cancel</button>
@@ -39,9 +44,20 @@
         <mat-form-field appearance="outline">
             <mat-label>Tipo de columna</mat-label>
             <mat-select (selectionChange)="onSelectColumn($event, dataIndex)">
-                <mat-option *ngFor="let column of config.columns" [value]="column">{{ column.title}}</mat-option>
+                <mat-option>Sin importar</mat-option>
+                <mat-option *ngFor="let column of getColumnsForUse(dataIndex)" [value]="column">{{ column.title}}</mat-option>
               </mat-select>
         </mat-form-field>
+
+        <div *ngFor="let column of config.columns">
+          <mat-form-field *ngIf="column.field_option != '' && column.field_option != undefined && column.columnIndex == dataIndex" appearance="outline">
+            <mat-label>Tipo de dato</mat-label>
+            <mat-select (selectionChange)="onSelectOption($event, column)">
+                <mat-option *ngFor="let option of column.options" [value]="option.id">{{ option.title}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+
         <div *ngFor="let item of dataExample" class="item-example">{{ item[dataIndex] }}</div>
     </div>
 </mat-dialog-content>

@@ -22,6 +22,7 @@ export class MiaImportModalComponent implements OnInit {
   headerNumberRow = 1;
 
   dataNumberRow = 1;
+  dataNumberEndRow = ''; // Numero de fila que temrina la información
   dataNumberExistRow = -1; // Numero de columnas en el archivo
   dataNumberExistRowArr: Array<number> = [];
   dataExample: Array<any> = [];
@@ -61,6 +62,10 @@ export class MiaImportModalComponent implements OnInit {
           }
           
         }
+
+        if(column.columnOptionId != undefined){
+          item[column.field_option!] = column.columnOptionId;
+        }
       }
 
       result.push(item);
@@ -69,10 +74,23 @@ export class MiaImportModalComponent implements OnInit {
     this.dialogRef.close(result);
   }
 
+  resetColumnIndex(index: number) {
+    this.config.columns.filter(c => c.columnIndex == index).forEach(c => {
+      c.columnIndex = -1;
+    });
+  }
+
   onSelectColumn(select: MatSelectChange, index: number) {
+    this.resetColumnIndex(index);
     let column: MiaImportColumn = select.value;
+    if(column == undefined){
+      return;
+    }
     column.columnIndex = index;
-    console.log(column);
+  }
+
+  onSelectOption(select: MatSelectChange, column: MiaImportColumn) {
+    column.columnOptionId = select.value;
   }
 
   onProcessFiles(target: any) {
@@ -141,9 +159,11 @@ export class MiaImportModalComponent implements OnInit {
 
       this.processXlsx(data[0]);
       this.isLoading = false;
-      console.log('--EXCEL--');
-      console.log(data);
 
     });
+  }
+
+  getColumnsForUse(index: number): Array<MiaImportColumn> {
+    return this.config.columns.filter(c => c.columnIndex == index || c.columnIndex == -1 || c.columnIndex == undefined);
   }
 }

@@ -20,9 +20,24 @@ export class AppComponent {
     config.title = 'Importación de Cuenta';
     config.columns = [
       { title: 'Description', field_key: 'title', type: MiaImportColumn.TYPE_STRING },
-      { title: 'Amount Debit', field_key: 'amount_debit', type: MiaImportColumn.TYPE_DOUBLE },
-      { title: 'Amount Credit', field_key: 'amount_credit', type: MiaImportColumn.TYPE_DOUBLE },
-      { title: 'Amount', field_key: 'amount', type: MiaImportColumn.TYPE_DOUBLE },
+      { title: 'Amount Debit', field_key: 'amount_debit', type: MiaImportColumn.TYPE_DOUBLE,
+        field_option: 'currency_debit', options: [
+          { id: 1, title: 'USD' },
+          { id: 2, title: 'ARS' },
+        ] 
+      },
+      { title: 'Amount Credit', field_key: 'amount_credit', type: MiaImportColumn.TYPE_DOUBLE,
+        field_option: 'currency_credit', options: [
+          { id: 1, title: 'USD' },
+          { id: 2, title: 'ARS' },
+        ]
+      },
+      { title: 'Amount', field_key: 'amount', type: MiaImportColumn.TYPE_DOUBLE,
+        field_option: 'currency', options: [
+          { id: 1, title: 'USD' },
+          { id: 2, title: 'ARS' },
+        ]
+      },
       { title: 'Date', field_key: 'date', type: MiaImportColumn.TYPE_DATE },
       { title: 'Notes', field_key: 'caption', type: MiaImportColumn.TYPE_STRING },
     ];
