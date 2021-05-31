@@ -22,7 +22,7 @@ export class MiaImportModalComponent implements OnInit {
   headerNumberRow = 1;
 
   dataNumberRow = 1;
-  dataNumberEndRow = ''; // Numero de fila que temrina la información
+  dataNumberEndRow = -1; // Numero de fila que temrina la información
   dataNumberExistRow = -1; // Numero de columnas en el archivo
   dataNumberExistRowArr: Array<number> = [];
   dataExample: Array<any> = [];
@@ -45,7 +45,7 @@ export class MiaImportModalComponent implements OnInit {
     let result = new Array<any>();
 
     for (let i = 0; i < this.dataRaw.length; i++) {
-      if(i < this.dataNumberExistRow){
+      if(i < this.dataNumberRow){
         continue;
       }
       const raw = this.dataRaw[i];
