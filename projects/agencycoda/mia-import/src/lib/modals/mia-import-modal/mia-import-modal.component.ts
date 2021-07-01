@@ -48,7 +48,7 @@ export class MiaImportModalComponent implements OnInit {
       if(i < this.dataNumberRow){
         continue;
       }
-      const raw = this.dataRaw[i];
+      const raw = this.dataRaw[i-1];
       
       let item: any = {};
       for (const column of this.config.columns) {
