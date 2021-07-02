@@ -40,26 +40,22 @@
 
 <!-- STEP 2 -->
 <mat-dialog-content *ngIf="step == 2" class="mat-typography">
-    <div *ngFor="let dataIndex of dataNumberExistRowArr" class="columns">
-        <mat-form-field appearance="outline">
-            <mat-label>Tipo de columna</mat-label>
-            <mat-select (selectionChange)="onSelectColumn($event, dataIndex)">
-                <mat-option>Sin importar</mat-option>
-                <mat-option *ngFor="let column of getColumnsForUse(dataIndex)" [value]="column">{{ column.title}}</mat-option>
-              </mat-select>
-        </mat-form-field>
+    
+  <div *ngFor="let dataC of dataColumns" class="columns">
+    <mat-form-field appearance="outline">
+        <mat-label>Tipo de columna</mat-label>
+        <mat-select (selectionChange)="onSelectDataColumn($event, dataC)">
+            <mat-option>Sin importar</mat-option>
+            <mat-option *ngFor="let column of config.columns" [value]="column">{{ column.title}}</mat-option>
+          </mat-select>
+    </mat-form-field>
 
-        <div *ngFor="let column of config.columns">
-          <mat-form-field *ngIf="column.field_option != '' && column.field_option != undefined && column.columnIndex == dataIndex" appearance="outline">
-            <mat-label>Tipo de dato</mat-label>
-            <mat-select (selectionChange)="onSelectOption($event, column)">
-                <mat-option *ngFor="let option of column.options" [value]="option.id">{{ option.title}}</mat-option>
-              </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div *ngFor="let item of dataExample" class="item-example">{{ item[dataIndex] }}</div>
+    <div *ngIf="dataC.column">
+      <mia-field-extra *ngFor="let field of dataC.column.moreFields" [field]="field"></mia-field-extra>
     </div>
+
+    <div *ngFor="let item of dataExample" class="item-example">{{ item[dataC.index] }}</div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions *ngIf="step == 2" align="end">

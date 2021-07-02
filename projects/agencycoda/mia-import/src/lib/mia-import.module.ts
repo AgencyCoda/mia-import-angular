@@ -12,9 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 /** COMPONENTS */
 import { MiaImportComponent } from './mia-import.component';
 import { MiaImportModalComponent } from './modals/mia-import-modal/mia-import-modal.component';
+import { MiaFieldExtraComponent } from './components/mia-field-extra/mia-field-extra.component';
 
 @NgModule({
-  declarations: [MiaImportComponent, MiaImportModalComponent],
+  declarations: [MiaImportComponent, MiaImportModalComponent, MiaFieldExtraComponent],
   imports: [
     CommonModule,
     FormsModule,

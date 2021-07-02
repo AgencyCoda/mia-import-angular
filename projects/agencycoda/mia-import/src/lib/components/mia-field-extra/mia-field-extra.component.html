@@ -1,0 +1,10 @@
+<mat-form-field *ngIf="field.field_type == 0" appearance="outline">
+    <mat-label>{{ field.title }}</mat-label>
+    <mat-select (selectionChange)="onSelectOption($event)">
+        <mat-option *ngFor="let option of field.options" [value]="option.id">{{ option.title}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field *ngIf="field.field_type == 1" appearance="outline">
+    <mat-label>{{ field.title }}</mat-label>
+    <input matInput type="text" [(ngModel)]="field.value" />
+</mat-form-field>

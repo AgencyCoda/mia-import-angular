@@ -9,8 +9,28 @@ export class MiaImportColumn {
     title: string = '';
     field_key: string = '';
     type: number = 0;
-    columnIndex?: number = -1;
-    field_option?: string = ''; // Key donde se guarda el valor del tipo de dato
+
+    moreFields?: Array<MiaImportExtraField>;
+
+    unique?: boolean; // Determina Si el tipo se permite seleccionar en mas de una columna para hacer merge o no.
+}
+
+export class MiaImportExtraField {
+    static TYPE_FORMAT = 0;
+    static TYPE_ADD = 1;
+
+    static FIELD_TYPE_SELECT = 0;
+    static FIELD_TYPE_INPUT = 1;
+
+    title: string = '';
+    field_key?: string = '';
+    type: number = 0;
+    field_type: number = 0;
     options?: Array<any>;
-    columnOptionId?: any;
+    value?: any;
+}
+
+export class MiaImportDataColumn {
+    index: number = 0;
+    column?: MiaImportColumn
 }
