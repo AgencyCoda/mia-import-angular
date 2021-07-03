@@ -153,7 +153,7 @@ export class MiaImportModalComponent implements OnInit {
 
   onSelectDataColumn(select: MatSelectChange, dataColumn: MiaImportDataColumn) {
     let column: MiaImportColumn = select.value;
-    dataColumn.column = column;
+    dataColumn.column = JSON.parse(JSON.stringify(column));
   }
 
   onProcessFiles(target: any) {
