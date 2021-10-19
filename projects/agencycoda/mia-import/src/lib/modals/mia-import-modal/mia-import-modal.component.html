@@ -54,7 +54,12 @@
       <mia-field-extra *ngFor="let field of dataC.column.moreFields" [field]="field"></mia-field-extra>
     </div>
 
-    <div *ngFor="let item of dataExample" class="item-example">{{ item[dataC.index] }}</div>
+    <div *ngFor="let item of dataExample; let index = index" class="item-example" [ngClass]="{'first-header': index == 0 && hasHeader}">
+      {{ item[dataC.index] }}
+    </div>
+
+    <br/>
+    <hr/>
   </div>
 </mat-dialog-content>
 
